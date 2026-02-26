@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "main.typ"
+      - "convert.py"
 
 jobs:
   build:

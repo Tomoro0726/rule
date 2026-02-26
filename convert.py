@@ -220,7 +220,7 @@ def render_markdown(nodes: list[dict]) -> str:
         elif t == "chapter":
             num = node["num"]
             title = node["title"]
-            lines.append(f"\n---\n\n## 第{num}章　{title}\n")
+            lines.append(f"\n## 第{num}章　{title}\n")
 
         elif t == "section":
             title = node["title"]
