@@ -43,9 +43,20 @@ jobs:
       - name: Build PDF
         run: typst compile main.typ main.pdf
 
-      # ── PDF をアーティファクトとして保存 ──
-      - name: Upload PDF as artifact
-        uses: actions/upload-artifact@v4
+      # ── タグ名を生成（例: v2024-01-15-a3f2c1）──
+      - name: Generate tag
+        id: tag
+        run: |
+          echo "name=v$(date +'%Y-%m-%d')-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      # ── Release を作成して PDF を添付 ──
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: output-pdf
-          path: main.pdf
+          tag_name: ${{ steps.tag.outputs.name }}
+          name: ${{ steps.tag.outputs.name }}
+          body: |
+            main.typ の変更により自動生成されました。
+
+            **コミット:** ${{ github.sha }}
+          files: main.pdf
