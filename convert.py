@@ -116,6 +116,22 @@ def parse_typst(src: str) -> list[dict]:
     for m in re.finditer(r'#article-counter\.update\(0\)', src):
         nodes.append({"type": "counter_reset", "pos": m.start()})
 
+    # ── Warningの置換
+    for m in re.finditer(r'#warning(?:\([^)]*\))?\s*\[', src):
+        start = m.end() - 1  # '[' の位置
+        depth = 0
+        end = start
+        for i, ch in enumerate(src[start:], start):
+            if ch == '[':
+                depth += 1
+            elif ch == ']':
+                depth -= 1
+                if depth == 0:
+                    end = i
+                    break
+        body_raw = src[start + 1:end]
+        nodes.append({"type": "warning", "body": body_raw.strip(), "pos": m.start()})
+
     # 出現順にソート
     nodes.sort(key=lambda n: n["pos"])
     return nodes
@@ -230,6 +246,14 @@ def render_markdown(nodes: list[dict]) -> str:
             article_counter += 1
             body_md = body_to_markdown(node["body"])
             lines.append(f"**第{article_counter}条**　{body_md}\n")
+        
+        elif t == "warning":
+            content = body_to_markdown(node["body"])
+            alert_box = (
+                "> [!WARNING]\n"
+                f"> {content}\n"
+            )
+            lines.append(alert_box)
 
     return "\n".join(lines)
 
