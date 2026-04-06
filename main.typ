@@ -64,22 +64,22 @@
 }
 
 //警告
-#let warning(content)={
-rect(stroke: red,width: 100%,inset: (top: 20pt,bottom: 20pt,left: 20pt,right: 20pt))[
-#align(center)[
-  #text(size: 20pt, weight: "bold",fill: red)[
-    #content
+#let warning(content) = {
+  rect(stroke: red, width: 100%, inset: (y: 20pt, x: 20pt))[
+    #set align(center)
+    #text(size: 20pt, weight: "bold", fill: red)[
+      #content
+    ]
   ]
-]
-]
 }
 
 
-
+// =============================================
+//  提案前の警告
+// =============================================
 #warning[
   2026年度6月総会にて提案予定
 ]
-
 
 
 // =============================================
