@@ -63,6 +63,18 @@
   ]
 }
 
+
+#rect(stroke: red,width: 100%,inset: (top: 20pt,bottom: 20pt,left: 20pt,right: 20pt))[
+#align(center)[
+  #text(size: 20pt, weight: "bold",fill: red)[
+    2026年度6月の総会にて提案予定案
+  ]
+]
+]
+
+
+
+
 // =============================================
 //  表紙タイトル
 // =============================================
@@ -70,7 +82,7 @@
 #v(1.5em)
 #align(center)[
   #text(size: 16pt, weight: "bold", tracking: 0.5em)[
-    順 心 広 尾 学 園 同 窓 会 規 約
+    順 心 広 尾 学 園 同 窓 会 規 約 （案）
   ]
 ]
 #v(2em)
