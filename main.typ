@@ -63,15 +63,22 @@
   ]
 }
 
-
-#rect(stroke: red,width: 100%,inset: (top: 20pt,bottom: 20pt,left: 20pt,right: 20pt))[
+//警告
+#let warning(content)={
+rect(stroke: red,width: 100%,inset: (top: 20pt,bottom: 20pt,left: 20pt,right: 20pt))[
 #align(center)[
   #text(size: 20pt, weight: "bold",fill: red)[
-    2026年度6月の総会にて提案予定案
+    #content
   ]
 ]
 ]
+}
 
+
+
+#warning[
+  2026年度6月総会にて提案予定
+]
 
 
 
